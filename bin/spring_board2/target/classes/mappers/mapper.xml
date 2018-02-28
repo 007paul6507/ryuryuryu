@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="com.spring_board2.mapper.mapper">
+ 
+ 	<select id="selectboard" resultType="boardVO">
+       select id,title,date,cnt,level,delmark from spring_reply order by id desc
+    </select>
+    <select id="selectone" resultType="boardVO">
+       select id,title,date,cnt,content from spring_reply where id=#{id}
+    </select>
+    
+    <insert id="create">
+    insert into spring_reply(title,content,date) values(#{title},#{content},now())
+    </insert>
+    
+    <delete id="delete">
+    delete from spring_reply where id=#{id}
+    </delete>
+    
+    <update id="update">
+    update spring_reply set title=#{title},date=now(),content=#{content} where id=#{id}
+    </update>
+
+    <update id="cntupdate">
+    update spring_reply set cnt= cnt+1 where id=#{id}
+    </update>
+
+</mapper>
+
