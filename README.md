@@ -30,3 +30,11 @@ link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/
 link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css
 
 으로 변경하여 수정을 완료함.
+
+-----------------------------------------------------------------------------------------------------
+
+20180302 hibernate(insert만 적용)
+
+새글 입력시에만 적용
+
+차후 업데이트 예정

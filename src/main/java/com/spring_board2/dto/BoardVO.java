@@ -2,16 +2,16 @@ package com.spring_board2.dto;
 
 public class BoardVO {
 	
-	private String id;
+	private int id;
 	private String title;
 	private String date;
 	private String content;
-	private String cnt;
-	private String rootid;
-	private String upid;
-	private String level;
-	private String sunseo;
-	private String delmark;
+	private int cnt;
+	private int rootid;
+	private int upid;
+	private int level;
+	private int sunseo;
+	private char delmark;
 	private String file1;
 	private String file2;
 	private String file3;
@@ -19,10 +19,10 @@ public class BoardVO {
 	private String filename2;
 	private String filename3;
 	private String writer_id;
-	public String getId() {
+	public int getId() {
 		return id;
 	}
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	public String getTitle() {
@@ -43,40 +43,40 @@ public class BoardVO {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public String getCnt() {
+	public int getCnt() {
 		return cnt;
 	}
-	public void setCnt(String cnt) {
+	public void setCnt(int cnt) {
 		this.cnt = cnt;
 	}
-	public String getRootid() {
+	public int getRootid() {
 		return rootid;
 	}
-	public void setRootid(String rootid) {
+	public void setRootid(int rootid) {
 		this.rootid = rootid;
 	}
-	public String getUpid() {
+	public int getUpid() {
 		return upid;
 	}
-	public void setUpid(String upid) {
+	public void setUpid(int upid) {
 		this.upid = upid;
 	}
-	public String getLevel() {
+	public int getLevel() {
 		return level;
 	}
-	public void setLevel(String level) {
+	public void setLevel(int level) {
 		this.level = level;
 	}
-	public String getSunseo() {
+	public int getSunseo() {
 		return sunseo;
 	}
-	public void setSunseo(String sunseo) {
+	public void setSunseo(int sunseo) {
 		this.sunseo = sunseo;
 	}
-	public String getDelmark() {
+	public char getDelmark() {
 		return delmark;
 	}
-	public void setDelmark(String delmark) {
+	public void setDelmark(char delmark) {
 		this.delmark = delmark;
 	}
 	public String getFile1() {

@@ -22,6 +22,8 @@ import com.spring_board2.dao.BoardDAO;
 import com.spring_board2.dto.BoardVO;
 import com.spring_board2.dto.Criteria;
 import com.spring_board2.dto.PageMaker;
+import com.spring_board2.hibernate.BoardProvider;
+import com.spring_board2.hibernate.BoardProviderImpl;
 import com.spring_board2.service.BoardService;
 
 
@@ -40,6 +42,7 @@ public class HomeController {
     //private BoardService service;
     @Inject
     private BoardDAO BDAO;
+    private static BoardProvider BPRO;
 	/*
     @RequestMapping("list")
     public String home(Locale locale, Model model) throws Exception{
@@ -68,7 +71,10 @@ public class HomeController {
     
     @RequestMapping(value="write", method=RequestMethod.POST)
     public String insert(@ModelAttribute BoardVO vo) throws Exception{
-        BDAO.create(vo);
+        //BDAO.create(vo);
+    	BPRO = new BoardProviderImpl();
+    	BPRO.insertBoard(vo);
+    	
         return "redirect:listPage";
     }
     
