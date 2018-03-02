@@ -123,6 +123,11 @@ public class HomeController {
     	return "listPage";	
     }
     
+    @RequestMapping(value = "test", method = RequestMethod.GET)
+    public void ajaxTest() {
+    	
+    }
+    
     
 	
 }

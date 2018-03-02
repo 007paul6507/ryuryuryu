@@ -3,15 +3,17 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- 합쳐지고 최소화된 최신 CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<!-- 모든 컴파일된 플러그인을 포함합니다 (아래), 원하지 않는다면 필요한 각각의 파일을 포함하세요 -->
+<script src="/mybatis/resources/js/bootstrap.min.js"></script>
 <script>
 function button_click(str){
 	if(str=="mod")haha.action='update_index';
@@ -22,10 +24,10 @@ function button_click(str){
 	}
 }
 </script>
-
 <title>글 조회</title>
 </head>
 <body>
+<section class="content">
 <div class="container">
 	<h1>석승 게시판</h1>
 <br><br>
@@ -97,8 +99,8 @@ function button_click(str){
 			<!-- The time line -->
 			<ul class="timeline">
 				<!-- timeline time label -->
-				<button type="button" class="btn btn-primary btn-xs" id="repliesDiv">
-						댓글 보기</button>
+				<li class="time-label" id="repliesDiv"><button type="button" class="btn btn-default">
+				댓글 목록</button></li>
 			</ul>
 
 			<div class='text-center'>
@@ -115,25 +117,25 @@ function button_click(str){
 
           
 <!-- Modal -->
-<div id="modifyModal" class="modal modal-primary fade" role="dialog">
+<div id="sujung" class="modal modal-primary fade" role="dialog">
   <div class="modal-dialog">
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title"></h4>
+      <h4 class="modal-title"></h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>      
       </div>
       <div class="modal-body" data-rno>
         <p><input type="text" id="replytext" class="form-control"></p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-info" id="replyModBtn">Modify</button>
-        <button type="button" class="btn btn-danger" id="replyDelBtn">DELETE</button>
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-info" id="replyModBtn">수정</button>
+        <button type="button" class="btn btn-danger" id="replyDelBtn">삭제</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
       </div>
     </div>
   </div>
-</div>      
+</div>     
 	
 <script id="template" type="text/x-handlebars-template">
 {{#each .}}
@@ -143,11 +145,11 @@ function button_click(str){
   <span class="time">
     <i class="fa fa-clock-o"></i>{{prettifyDate regdate}}
   </span>
-  <h1 class="timeline-header">{{rno}} -{{replyer}}</h1>
+  <h3 class="timeline-header"><strong>{{rno}}</strong> -{{replyer}}</h3>
   <div class="timeline-body">{{replytext}} </div>
     <div class="timeline-footer">
      <a class="btn btn-primary btn-xs" 
-	    data-toggle="modal" data-target="#modifyModal">댓글 수정</a>
+	    data-toggle="modal" data-target="#sujung">댓글 수정</a>
     </div>
   </div>			
 </li>
@@ -183,7 +185,7 @@ function button_click(str){
 			printData(data.list, $("#repliesDiv"), $('#template'));
 			printPaging(data.pageMaker, $(".pagination"));
 
-			jQuery("#modifyModal").modal('hide');
+			$("#sujung").modal('hide');
 
 		});
 	}
@@ -261,12 +263,12 @@ function button_click(str){
 	});
 
 
-	jQuery(".timeline").on("click", ".replyLi", function(event){
+	$(".timeline").on("click", ".replyLi", function(event){
 		
 		var reply = $(this);
 		
-		jQuery("#replytext").val(reply.find('.timeline-body').text());
-		jQuery(".modal-title").html(reply.attr("data-rno"));
+		$("#replytext").val(reply.find('.timeline-body').text());
+		$(".modal-title").html(reply.attr("data-rno"));
 		
 	});
 	
@@ -274,12 +276,12 @@ function button_click(str){
 
 	$("#replyModBtn").on("click",function(){
 		  
-		  var rno = jQuery(".modal-title").html();
-		  var replytext = jQuery("#replytext").val();
+		  var rno = $(".modal-title").html();
+		  var replytext = $("#replytext").val();
 		  
 		  $.ajax({
 				type:'put',
-				url:'/replies/'+rno,
+				url:'/mybatis/replies/'+rno,
 				headers: { 
 				      "Content-Type": "application/json",
 				      "X-HTTP-Method-Override": "PUT" },
@@ -296,12 +298,12 @@ function button_click(str){
 
 	$("#replyDelBtn").on("click",function(){
 		  
-		  var rno = jQuery(".modal-title").html();
-		  var replytext = jQuery("#replytext").val();
+		  var rno = $(".modal-title").html();
+		  var replytext = $("#replytext").val();
 		  
 		  $.ajax({
 				type:'delete',
-				url:'/replies/'+rno,
+				url:'/mybatis/replies/'+rno,
 				headers: { 
 				      "Content-Type": "application/json",
 				      "X-HTTP-Method-Override": "DELETE" },
